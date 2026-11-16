@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { posts, getPost } from "@/data/blog";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
@@ -9,6 +10,9 @@ import { ButtonLink } from "@/components/ui/Button";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { articleSchema, buildMetadata } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
+import { TableOfContents, ShareButton } from "@/components/blog/ArticleTools.client";
+
+const slugify = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -32,7 +36,10 @@ export default async function BlogPostPage({ params }: Props) {
   const post = getPost(slug);
   if (!post) notFound();
   const path = `/blog/${post.slug}`;
-  const related = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const others = posts.filter((p) => p.slug !== post.slug);
+  const related = others.slice(0, 3);
+  const latest = [...others].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 4);
+  const toc = post.content.filter((b) => b.heading).map((b) => ({ id: slugify(b.heading!), label: b.heading! }));
 
   return (
     <>
@@ -52,27 +59,63 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="container-x max-w-5xl">
           <CoverArt variant={post.art} label={`Featured illustration for “${post.title}”`} className="aspect-[21/9] rounded-[28px]" />
         </div>
-        <div className="container-x max-w-3xl py-16 sm:py-20">
-          <div className="space-y-10 text-lg leading-[1.8] text-white/85">
-            {post.content.map((block, i) => (
-              <section key={i}>
-                {block.heading && <h2 className="mb-4 text-2xl font-semibold text-white sm:text-3xl">{block.heading}</h2>}
-                <div className="space-y-5">
-                  {block.paragraphs.map((p) => <p key={p}>{p}</p>)}
-                </div>
-                {block.list && (
-                  <ul className="mt-5 space-y-2 border-l-2 border-lime pl-6">
-                    {block.list.map((li) => <li key={li}>{li}</li>)}
-                  </ul>
-                )}
-              </section>
-            ))}
+        <div className="container-x max-w-[1320px] py-12 sm:py-16">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-line pb-6">
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="text-muted">Tags</span>
+              <Link href="/blog" className="rounded-lg bg-violet/25 px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-violet-soft transition-colors hover:bg-violet/40">{post.category}</Link>
+            </div>
+            <ShareButton title={post.title} />
           </div>
-          <aside className="mt-16 rounded-[var(--radius-card)] border border-line bg-ink-2 p-8">
-            <p className="font-display text-2xl font-semibold">Want this applied to your business?</p>
-            <p className="mt-2 text-muted">Get a free growth audit with prioritised recommendations for your website and campaigns.</p>
-            <ButtonLink href="/contact?intent=audit" arrow className="mt-6">Get a free growth audit</ButtonLink>
-          </aside>
+
+          <div className="mt-10 grid gap-10 lg:grid-cols-[280px_minmax(0,1fr)] xl:grid-cols-[280px_minmax(0,1fr)_300px]">
+            {toc.length > 0 && (
+              <div className="lg:sticky lg:top-28 lg:self-start">
+                <TableOfContents items={toc} />
+              </div>
+            )}
+
+            <div className="min-w-0">
+              <div className="space-y-10 text-lg leading-[1.8] text-white/85">
+                {post.content.map((block, i) => (
+                  <section key={i}>
+                    {block.heading && <h2 id={slugify(block.heading)} className="mb-4 scroll-mt-28 text-2xl font-semibold text-white sm:text-3xl">{block.heading}</h2>}
+                    <div className="space-y-5">
+                      {block.paragraphs.map((p) => <p key={p}>{p}</p>)}
+                    </div>
+                    {block.list && (
+                      <ul className="mt-5 space-y-2 border-l-2 border-lime pl-6">
+                        {block.list.map((li) => <li key={li}>{li}</li>)}
+                      </ul>
+                    )}
+                  </section>
+                ))}
+              </div>
+              <aside className="mt-16 rounded-[var(--radius-card)] border border-line bg-ink-2 p-8">
+                <p className="font-display text-2xl font-semibold">Want this applied to your business?</p>
+                <p className="mt-2 text-muted">Get a free growth audit with prioritised recommendations for your website and campaigns.</p>
+                <ButtonLink href="/contact?intent=audit" arrow className="mt-6">Get a free growth audit</ButtonLink>
+              </aside>
+            </div>
+
+            <aside aria-labelledby="latest-posts" className="lg:col-span-2 xl:sticky xl:top-28 xl:col-span-1 xl:self-start">
+              <p id="latest-posts" className="font-display text-xl font-semibold">Latest blogs</p>
+              <ul className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-1">
+                {latest.map((p) => (
+                  <li key={p.slug}>
+                    <Link href={`/blog/${p.slug}`} className="group flex gap-4 rounded-2xl border border-line bg-ink-2 p-3 transition-colors hover:border-violet/60">
+                      <CoverArt variant={p.art} label={`Thumbnail for “${p.title}”`} className="aspect-square w-20 shrink-0 rounded-xl" />
+                      <span className="min-w-0">
+                        <span className="font-mono text-[11px] text-lime">{p.category}</span>
+                        <span className="mt-1 block font-medium leading-snug group-hover:text-violet-soft">{p.title}</span>
+                        <time dateTime={p.date} className="mt-1 block text-xs text-muted">{formatDate(p.date)}</time>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          </div>
         </div>
       </article>
 

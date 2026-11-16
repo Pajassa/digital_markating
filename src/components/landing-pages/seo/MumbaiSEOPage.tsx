@@ -6,7 +6,7 @@ import { Eyebrow } from "@/components/ui/SectionHeading";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { cn } from "@/lib/utils";
 import { LandingCrumbs, contactHref, H1Kicker } from "../shared";
-import { SerpStack, QueryTheatre } from "./MumbaiSEO.client";
+import { SerpStack, QueryTheatre, SeoOffering } from "./MumbaiSEO.client";
 
 const href = contactHref("mumbai", "seo");
 
@@ -121,6 +121,19 @@ export function MumbaiSEOPage() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* OFFERING — tabbed service explorer */}
+      <section className="section-y pt-0" aria-labelledby="ms-offering">
+        <div className="container-x">
+          <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+            <h2 id="ms-offering" className="max-w-3xl text-4xl font-semibold leading-[1.02] sm:text-6xl">
+              SEO services in Mumbai<span className="text-lime">.</span>
+            </h2>
+            <p className="max-w-sm text-lg text-muted">Pick a service to see what&apos;s included and how we approach it.</p>
+          </div>
+          <SeoOffering items={c.offering} />
         </div>
       </section>
 
