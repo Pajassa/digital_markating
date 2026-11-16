@@ -45,6 +45,43 @@ export const mumbaiSeo = {
     { title: "Category & product SEO", body: "Structured category pages, filters and schema for Mumbai retailers and D2C stores.", size: "sm" },
     { title: "Digital PR", body: "Earned coverage and relevant links from publications your buyers already read.", size: "sm" },
   ],
+  offering: [
+    {
+      key: "technical",
+      tab: "Technical SEO",
+      title: "Technical SEO Services in Mumbai",
+      body: "If Google can't crawl, render and index your pages, nothing else you do in SEO counts. We audit the foundations of your site — speed, crawl paths, indexation and structured data — and fix what's holding Mumbai listing, catalogue and service sites back.",
+      points: ["Core Web Vitals and page speed", "Crawl budget and index hygiene", "Schema and structured data", "Site architecture and redirects"],
+    },
+    {
+      key: "onpage",
+      tab: "On-page SEO",
+      title: "On-page SEO Services in Mumbai",
+      body: "Every important page should answer one search intent better than anything else ranking for it. We rewrite titles, headings, copy and internal links so each page clearly targets the Mumbai queries your customers actually type.",
+      points: ["Titles, meta and headings", "Intent-matched page copy", "Internal linking", "Locality and service pages"],
+    },
+    {
+      key: "offpage",
+      tab: "Off-page SEO",
+      title: "Off-page SEO & Link Building in Mumbai",
+      body: "Authority still decides close races. We earn mentions and links from publications, directories and partners that are relevant to your industry and city — no paid link farms, no tactics that put your domain at risk.",
+      points: ["Digital PR and outreach", "Local citations and directories", "Google Business Profile", "Reviews workflow"],
+    },
+    {
+      key: "keywords",
+      tab: "Keyword research",
+      title: "Keyword Research for Mumbai Businesses",
+      body: "We start from how your buyers search — suburbs, configurations, price points and questions — not from a generic tool export. Keywords are grouped by intent and each cluster gets one page that owns it.",
+      points: ["Intent and locality mapping", "Competitor gap analysis", "Keyword-to-page clusters", "Prioritised by revenue potential"],
+    },
+    {
+      key: "content",
+      tab: "Content strategy",
+      title: "SEO Content Strategy in Mumbai",
+      body: "Content that ranks and converts needs a plan, a voice and a calendar. We build topic pillars around your services, brief expert writers and publish on a fixed cadence so your site keeps growing in authority every month.",
+      points: ["Topic pillars and clusters", "Expert-reviewed articles", "Monthly content calendar", "Refreshes of decaying pages"],
+    },
+  ],
   process: [
     { step: "Listen", body: "Interview your sales team. What do Mumbai customers ask before they buy?" },
     { step: "Map", body: "Group keywords by intent and locality, then assign each cluster one owning page." },
