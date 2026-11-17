@@ -91,7 +91,7 @@ export function Testimonials() {
                   aria-selected={i === index}
                   aria-label={`Show testimonial ${i + 1}`}
                   onClick={() => { setDir(i > index ? 1 : -1); setIndex(i); }}
-                  className="grid h-6 place-items-center"
+                  className="grid h-6 min-w-6 place-items-center px-1"
                 >
                   <span className={`block h-1.5 rounded-full transition-all duration-500 ${i === index ? "w-8 bg-lime" : "w-3 bg-white/20"}`} />
                 </button>
