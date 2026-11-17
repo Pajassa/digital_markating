@@ -35,9 +35,8 @@ export function ServiceCard({ service, index, featured }: { service: Service; in
       <Link
         href={`/services/${service.slug}`}
         className="mt-auto flex items-center gap-2 pt-8 text-sm font-medium text-white after:absolute after:inset-0"
-        aria-label={`Learn more about ${service.title}`}
       >
-        Learn more
+        Explore {service.title}
         <ArrowRight aria-hidden className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
       </Link>
     </article>

@@ -65,7 +65,7 @@ export function Hero() {
           </motion.div>
 
           <motion.ul
-            className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs uppercase tracking-[0.14em] text-white/55"
+            className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs uppercase tracking-[0.14em] text-white/70"
             aria-label="Core services"
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}

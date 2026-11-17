@@ -71,11 +71,11 @@ export function Footer() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {cities.map((city) => (
             <div key={city}>
-              <h2 className="font-mono text-xs uppercase tracking-[0.18em] text-muted"><Link href={`/${city}`} className="hover:text-white">{t.cities[city]}</Link></h2>
-              <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-sm">
+              <h2 className="font-mono text-xs uppercase tracking-[0.18em] text-muted"><Link href={`/${city}`} className="inline-flex min-h-6 items-center py-1 hover:text-white">{t.cities[city]}</Link></h2>
+              <ul className="mt-3 flex flex-wrap gap-x-2 text-sm">
                 {landingServices.map((s) => (
                   <li key={s}>
-                    <Link href={cityHref(city, s)} className="text-white/70 transition-colors hover:text-white">{t.landingServices[s]}</Link>
+                    <Link href={cityHref(city, s)} className="inline-flex min-h-6 items-center py-1.5 pr-2 text-white/70 transition-colors hover:text-white">{t.landingServices[s]}</Link>
                   </li>
                 ))}
               </ul>
@@ -83,12 +83,6 @@ export function Footer() {
           ))}
         </div>
       </nav>
-
-      <div aria-hidden className="container-x select-none overflow-hidden">
-        <p className="translate-y-[18%] text-center font-display text-[19vw] font-bold leading-none tracking-tight text-white/[0.035] lg:text-[13.5rem]">
-          {t.brand}
-        </p>
-      </div>
 
       <div className="border-t border-line">
         <div className="container-x flex flex-col gap-3 py-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
