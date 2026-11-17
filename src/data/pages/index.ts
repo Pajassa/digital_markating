@@ -1,6 +1,7 @@
 import { mumbaiSeo, mumbaiDigital, mumbaiSocial, mumbaiEmail } from "./mumbai";
 import { bangaloreSeo, bangaloreDigital, bangaloreSocial, bangaloreEmail } from "./bangalore";
 import { dubaiSeo, dubaiDigital, dubaiSocial, dubaiEmail } from "./dubai";
+import { singaporeSeo, singaporeDigital, singaporeSocial, singaporeEmail } from "./singapore";
 import { cities, landingServices, landingPath, type CityKey, type LandingBase, type LandingServiceKey } from "./types";
 
 export * from "./types";
@@ -23,6 +24,12 @@ export const landingPages: Record<CityKey, Record<LandingServiceKey, LandingBase
     "digital-marketing-agency": dubaiDigital,
     "social-media-marketing": dubaiSocial,
     "email-marketing": dubaiEmail,
+  },
+  singapore: {
+    seo: singaporeSeo,
+    "digital-marketing-agency": singaporeDigital,
+    "social-media-marketing": singaporeSocial,
+    "email-marketing": singaporeEmail,
   },
 };
 

@@ -1,6 +1,6 @@
 import type { FAQ } from "@/types";
 
-export const cities = ["mumbai", "bangalore", "dubai"] as const;
+export const cities = ["singapore", "dubai", "mumbai", "bangalore"] as const;
 export type CityKey = (typeof cities)[number];
 
 export const landingServices = ["seo", "digital-marketing-agency", "social-media-marketing", "email-marketing"] as const;
@@ -10,12 +10,14 @@ export const cityNames: Record<CityKey, string> = {
   mumbai: "Mumbai",
   bangalore: "Bangalore",
   dubai: "Dubai",
+  singapore: "Singapore",
 };
 
 export const cityCountry: Record<CityKey, string> = {
   mumbai: "India",
   bangalore: "India",
   dubai: "United Arab Emirates",
+  singapore: "Singapore",
 };
 
 export const serviceNames: Record<LandingServiceKey, string> = {

@@ -77,6 +77,7 @@ export const serviceSchema = (s: { name: string; description: string; path: stri
   areaServed: [
     { "@type": "Country", name: "India" },
     { "@type": "Country", name: "United Arab Emirates" },
+    { "@type": "Country", name: "Singapore" },
   ],
   provider: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
 });

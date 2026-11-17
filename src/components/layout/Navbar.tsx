@@ -11,9 +11,13 @@ import { Logo } from "@/components/ui/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import { MobileMenu } from "./MobileMenu";
 import { cn } from "@/lib/utils";
+import { useSiteLang } from "@/config/chrome-i18n";
 
 export function Navbar() {
   const pathname = usePathname();
+  const { lang, t, dir } = useSiteLang();
+  const label = (href: string, fallback: string) => t.nav[href as keyof typeof t.nav] ?? fallback;
+  const svc = (href: string, fallback: string) => t.coreServices[href.replace("/services/", "")] ?? fallback;
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [dropdown, setDropdown] = useState(false);
@@ -60,16 +64,18 @@ export function Navbar() {
 
   return (
     <header
+      lang={lang}
+      dir={dir}
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
         scrolled ? "border-b border-line bg-ink/80 backdrop-blur-xl" : "border-b border-transparent bg-transparent",
       )}
     >
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-lg focus:bg-lime focus:px-4 focus:py-2 focus:text-ink">
-        Skip to content
+        {t.skip}
       </a>
       <nav aria-label="Primary" className={cn("container-x flex items-center justify-between transition-all duration-500", scrolled ? "h-16" : "h-20")}>
-        <Logo />
+        <Logo name={t.brand} />
 
         <ul className="hidden items-center gap-1 lg:flex">
           {mainNav.map((item) =>
@@ -80,13 +86,13 @@ export function Navbar() {
                     href={item.href}
                     className={cn("rounded-full py-2 pl-4 pr-1 text-sm transition-colors", isActive(item.href) ? "text-white" : "text-white/70 hover:text-white")}
                   >
-                    {item.label}
+                    {label(item.href, item.label)}
                   </Link>
                   <button
                     type="button"
                     aria-expanded={dropdown}
                     aria-controls="services-menu"
-                    aria-label="Show services"
+                    aria-label={t.showServices}
                     onClick={() => setDropdown((d) => !d)}
                     className="rounded-full p-2 text-white/70 hover:text-white"
                   >
@@ -112,14 +118,14 @@ export function Navbar() {
                                 <Icon aria-hidden className="size-4" />
                               </span>
                               <span>
-                                <span className="block text-sm font-medium text-white">{s.label}</span>
-                                <span className="mt-0.5 block text-xs leading-snug text-muted">{s.description}</span>
+                                <span className="block text-sm font-medium text-white">{svc(s.href, s.label)}</span>
+                                {lang === "en" && <span className="mt-0.5 block text-xs leading-snug text-muted">{s.description}</span>}
                               </span>
                             </Link>
                           );
                         })}
                         <Link href="/services" className="col-span-2 mt-1 rounded-2xl border border-line px-4 py-3 text-center text-sm text-white/80 transition-colors hover:border-white/30 hover:text-white">
-                          View all services →
+                          {t.viewAllServices}
                         </Link>
                       </div>
                     </motion.div>
@@ -133,7 +139,7 @@ export function Navbar() {
                   aria-current={isActive(item.href) ? "page" : undefined}
                   className={cn("rounded-full px-4 py-2 text-sm transition-colors", isActive(item.href) ? "text-white" : "text-white/70 hover:text-white")}
                 >
-                  {item.label}
+                  {label(item.href, item.label)}
                 </Link>
               </li>
             ),
@@ -142,12 +148,12 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <ButtonLink href="/contact" size="sm" arrow className="hidden sm:inline-flex">
-            Let&apos;s Talk
+            {t.letsTalk}
           </ButtonLink>
           <button
             type="button"
             className="grid size-10 place-items-center rounded-full border border-line text-white lg:hidden"
-            aria-label="Open menu"
+            aria-label={t.openMenu}
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen(true)}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useSiteLang } from "@/config/chrome-i18n";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -11,6 +12,8 @@ import { cn } from "@/lib/utils";
 
 export function MobileMenu({ open, onClose, isActive }: { open: boolean; onClose: () => void; isActive: (href: string) => boolean }) {
   const [servicesOpen, setServicesOpen] = useState(false);
+  const { t, dir, lang } = useSiteLang();
+  const label = (href: string, fallback: string) => t.nav[href as keyof typeof t.nav] ?? t.coreServices[href.replace("/services/", "")] ?? fallback;
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -46,6 +49,8 @@ export function MobileMenu({ open, onClose, isActive }: { open: boolean; onClose
         <motion.div
           id="mobile-menu"
           role="dialog"
+          lang={lang}
+          dir={dir}
           aria-modal="true"
           aria-label="Site menu"
           ref={panelRef}
@@ -57,7 +62,7 @@ export function MobileMenu({ open, onClose, isActive }: { open: boolean; onClose
         >
           <div className="container-x flex h-20 items-center justify-between">
             <span className="font-display text-lg font-bold tracking-[0.04em]">{siteConfig.name}</span>
-            <button type="button" onClick={onClose} aria-label="Close menu" className="grid size-10 place-items-center rounded-full border border-line">
+            <button type="button" onClick={onClose} aria-label={t.closeMenu} className="grid size-10 place-items-center rounded-full border border-line">
               <X aria-hidden className="size-5" />
             </button>
           </div>
@@ -81,16 +86,16 @@ export function MobileMenu({ open, onClose, isActive }: { open: boolean; onClose
                       aria-expanded={servicesOpen}
                       className="flex w-full items-center justify-between py-5 font-display text-3xl font-semibold"
                     >
-                      {item.label}
+                      {label(item.href, item.label)}
                       <ChevronDown aria-hidden className={cn("size-6 transition-transform", servicesOpen && "rotate-180")} />
                     </button>
                     <AnimatePresence initial={false}>
                       {servicesOpen && (
                         <motion.ul initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden">
-                          {[{ label: "All services", href: item.href }, ...item.children].map((c) => (
+                          {[{ label: t.allServices, href: item.href }, ...item.children].map((c) => (
                             <li key={c.href}>
                               <Link href={c.href} onClick={onClose} className="block py-2.5 pl-1 text-white/70 hover:text-white">
-                                {c.label}
+                                {c.href === item.href ? c.label : label(c.href, c.label)}
                               </Link>
                             </li>
                           ))}
@@ -105,7 +110,7 @@ export function MobileMenu({ open, onClose, isActive }: { open: boolean; onClose
                     onClick={onClose}
                     className={cn("block py-5 font-display text-3xl font-semibold", isActive(item.href) ? "text-lime" : "text-white")}
                   >
-                    {item.label}
+                    {label(item.href, item.label)}
                   </Link>
                 )}
               </motion.li>
@@ -113,10 +118,10 @@ export function MobileMenu({ open, onClose, isActive }: { open: boolean; onClose
           </motion.ul>
           <div className="container-x grid gap-3 pb-8 pt-6">
             <ButtonLink href="/contact" size="lg" arrow onClick={onClose}>
-              Let&apos;s Talk
+              {t.letsTalk}
             </ButtonLink>
             <ButtonLink href={whatsappLink()} variant="outline" size="lg">
-              Chat on WhatsApp
+              {t.whatsappChat}
             </ButtonLink>
           </div>
         </motion.div>

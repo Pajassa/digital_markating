@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { cities, cityCountry, cityNames, isCity, landingPages, landingPath, landingServices, serviceNames } from "@/data/pages";
 import { cityHubs } from "@/data/pages/hubs";
-import { arabicPath } from "@/data/pages/dubai-ar";
+import { cityLangs, langMeta, localizedPath } from "@/data/pages/i18n";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
@@ -75,23 +75,27 @@ export default async function CityHubPage({ params }: Props) {
               </Reveal>
             ))}
           </ul>
-          {city === "dubai" && (
-            <p className="mt-6 text-muted">
-              Also in Arabic:{" "}
-              {landingServices.map((s, i) => (
-                <span key={s}>
-                  {i > 0 && " · "}
-                  <Link href={arabicPath(s)} lang="ar" hrefLang="ar" className="text-white/80 underline-offset-4 hover:text-lime hover:underline">{serviceNames[s]}</Link>
-                </span>
+          {cityLangs[city] && (
+            <div className="mt-6 space-y-2 text-muted">
+              {cityLangs[city]!.map((l) => (
+                <p key={l}>
+                  <span lang={l}>{langMeta[l].native}</span> <span className="text-xs">({langMeta[l].english})</span>:{" "}
+                  {landingServices.map((s, i) => (
+                    <span key={s}>
+                      {i > 0 && " · "}
+                      <Link href={localizedPath(l, city, s)} hrefLang={l} className="text-white/80 underline-offset-4 hover:text-lime hover:underline">{serviceNames[s]}</Link>
+                    </span>
+                  ))}
+                </p>
               ))}
-            </p>
+            </div>
           )}
           <div className="mt-12 flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-muted">
               Also serving{" "}
               {others.map((c, i) => (
                 <span key={c}>
-                  {i > 0 && " and "}
+                  {i > 0 && (i === others.length - 1 ? " and " : ", ")}
                   <Link href={`/${c}`} className="text-white/85 underline-offset-4 hover:text-lime hover:underline">{cityNames[c]}</Link>
                 </span>
               ))}
