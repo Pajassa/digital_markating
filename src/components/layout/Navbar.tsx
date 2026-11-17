@@ -75,7 +75,7 @@ export function Navbar() {
         {t.skip}
       </a>
       <nav aria-label="Primary" className={cn("container-x flex items-center justify-between transition-all duration-500", scrolled ? "h-16" : "h-20")}>
-        <Logo />
+        <Logo name={t.brand} />
 
         <ul className="hidden items-center gap-1 lg:flex">
           {mainNav.map((item) =>

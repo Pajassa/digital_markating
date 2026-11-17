@@ -8,6 +8,8 @@ export type UILang = Lang | "en";
 
 /** Text for the navbar, mobile menu and footer in each site language. */
 export interface ChromeText {
+  /** Brand name in this language's script */
+  brand: string;
   nav: Record<"/" | "/services" | "/about" | "/case-studies" | "/industries" | "/blog" | "/contact", string>;
   letsTalk: string;
   viewAllServices: string;
@@ -25,6 +27,7 @@ export interface ChromeText {
 }
 
 const en: ChromeText = {
+  brand: "Tesoap Lab",
   nav: { "/": "Home", "/services": "Services", "/about": "About", "/case-studies": "Case Studies", "/industries": "Industries", "/blog": "Insights", "/contact": "Contact" },
   letsTalk: "Let's Talk",
   viewAllServices: "View all services →",
@@ -44,6 +47,7 @@ const en: ChromeText = {
 };
 
 const ar: ChromeText = {
+  brand: "تيسوب لاب",
   nav: { "/": "الرئيسية", "/services": "الخدمات", "/about": "من نحن", "/case-studies": "دراسات الحالة", "/industries": "القطاعات", "/blog": "المقالات", "/contact": "تواصل معنا" },
   letsTalk: "تحدّث إلينا",
   viewAllServices: "عرض جميع الخدمات ←",
@@ -64,6 +68,7 @@ const ar: ChromeText = {
 };
 
 const ja: ChromeText = {
+  brand: "テソープ・ラボ",
   nav: { "/": "ホーム", "/services": "サービス", "/about": "会社概要", "/case-studies": "事例", "/industries": "業界", "/blog": "コラム", "/contact": "お問い合わせ" },
   letsTalk: "相談する",
   viewAllServices: "すべてのサービスを見る →",
@@ -84,6 +89,7 @@ const ja: ChromeText = {
 };
 
 const es: ChromeText = {
+  brand: "Tesoap Lab",
   nav: { "/": "Inicio", "/services": "Servicios", "/about": "Nosotros", "/case-studies": "Casos de éxito", "/industries": "Sectores", "/blog": "Blog", "/contact": "Contacto" },
   letsTalk: "Hablemos",
   viewAllServices: "Ver todos los servicios →",
@@ -104,6 +110,7 @@ const es: ChromeText = {
 };
 
 const fr: ChromeText = {
+  brand: "Tesoap Lab",
   nav: { "/": "Accueil", "/services": "Services", "/about": "À propos", "/case-studies": "Études de cas", "/industries": "Secteurs", "/blog": "Blog", "/contact": "Contact" },
   letsTalk: "Parlons-en",
   viewAllServices: "Voir tous les services →",

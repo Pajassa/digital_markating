@@ -22,7 +22,7 @@ export function Footer() {
     <footer lang={lang} dir={dir} className="relative overflow-hidden border-t border-line bg-ink">
       <div className="container-x grid gap-12 py-16 sm:py-20 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <Logo />
+          <Logo name={t.brand} />
           <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-muted">{t.footer.tagline || siteConfig.coreMessage}</p>
           {siteConfig.social.length > 0 && (
           <ul className="mt-6 flex gap-2" aria-label="Social media">
@@ -86,7 +86,7 @@ export function Footer() {
 
       <div aria-hidden className="container-x select-none overflow-hidden">
         <p className="translate-y-[18%] text-center font-display text-[19vw] font-bold leading-none tracking-tight text-white/[0.035] lg:text-[13.5rem]">
-          {siteConfig.name}
+          {t.brand}
         </p>
       </div>
 
