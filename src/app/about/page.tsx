@@ -50,12 +50,12 @@ export default function AboutPage() {
             <div className="mt-8 h-1 w-16 rounded-full bg-gradient-to-r from-violet to-lime" />
             <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-black/10 pt-8">
               <div>
-                <dt className="text-sm text-[#6b7085]">Based in</dt>
-                <dd className="mt-1 font-display text-xl font-semibold">Mumbai</dd>
+                <dt className="text-sm text-[#6b7085]">Clients</dt>
+                <dd className="mt-1 font-display text-xl font-semibold">Worldwide</dd>
               </div>
               <div>
-                <dt className="text-sm text-[#6b7085]">Working across</dt>
-                <dd className="mt-1 font-display text-xl font-semibold">India &amp; UAE</dd>
+                <dt className="text-sm text-[#6b7085]">Markets</dt>
+                <dd className="mt-1 font-display text-xl font-semibold">Singapore, UAE &amp; India</dd>
               </div>
               <div className="col-span-2">
                 <dt className="text-sm text-[#6b7085]">Under one strategy</dt>

@@ -63,6 +63,7 @@ export function Navbar() {
   };
 
   return (
+    <>
     <header
       lang={lang}
       dir={dir}
@@ -162,7 +163,9 @@ export function Navbar() {
           </button>
         </div>
       </nav>
-      <MobileMenu open={open} onClose={() => setOpen(false)} isActive={isActive} />
     </header>
+    {/* Rendered outside <header>: the header's backdrop-blur would otherwise trap this fixed panel inside the header bar once scrolled. */}
+    <MobileMenu open={open} onClose={() => setOpen(false)} isActive={isActive} />
+    </>
   );
 }

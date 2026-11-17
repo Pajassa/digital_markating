@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, X } from "lucide-react";
 import { mainNav } from "@/config/navigation";
 import { ButtonLink } from "@/components/ui/Button";
-import { siteConfig, whatsappLink } from "@/config/site";
+import { whatsappLink } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 export function MobileMenu({ open, onClose, isActive }: { open: boolean; onClose: () => void; isActive: (href: string) => boolean }) {
@@ -61,7 +61,7 @@ export function MobileMenu({ open, onClose, isActive }: { open: boolean; onClose
           className="fixed inset-0 z-[60] flex flex-col bg-ink lg:hidden"
         >
           <div className="container-x flex h-20 items-center justify-between">
-            <span className="font-display text-lg font-bold tracking-[0.04em]">{siteConfig.name}</span>
+            <span className="font-display text-lg font-bold tracking-[0.04em]">{t.brand}</span>
             <button type="button" onClick={onClose} aria-label={t.closeMenu} className="grid size-10 place-items-center rounded-full border border-line">
               <X aria-hidden className="size-5" />
             </button>
