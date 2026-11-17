@@ -45,14 +45,9 @@ export function Hero() {
             </span>
           </motion.h1>
 
-          <motion.p
-            className="mt-6 max-w-xl text-lg leading-relaxed text-muted"
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.7 }}
-          >
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
             We help ambitious businesses grow through strategic SEO, performance marketing, and data-driven digital experiences.
-          </motion.p>
+          </p>
 
           <motion.div
             className="mt-9 flex flex-col gap-3 sm:flex-row"
