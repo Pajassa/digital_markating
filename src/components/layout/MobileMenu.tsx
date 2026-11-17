@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, X } from "lucide-react";
 import { mainNav } from "@/config/navigation";
 import { ButtonLink } from "@/components/ui/Button";
-import { siteConfig, whatsappLink } from "@/config/site";
+import { whatsappLink } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 export function MobileMenu({ open, onClose, isActive }: { open: boolean; onClose: () => void; isActive: (href: string) => boolean }) {
