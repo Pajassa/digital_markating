@@ -39,7 +39,7 @@ const en: ChromeText = {
   showServices: "Show services",
   footer: {
     services: "Services", company: "Company", contact: "Contact", locations: "Locations", whatsapp: "WhatsApp us",
-    hours: "Mon – Sat, 10:00 – 19:00 IST", tagline: "", rights: "All rights reserved.", privacy: "Privacy Policy", terms: "Terms & Conditions",
+    hours: "Mon – Sat · working across time zones", tagline: "", rights: "All rights reserved.", privacy: "Privacy Policy", terms: "Terms & Conditions",
   },
   coreServices: {},
   cities: { singapore: "Singapore", dubai: "Dubai", mumbai: "Mumbai", bangalore: "Bangalore" },
@@ -59,7 +59,7 @@ const ar: ChromeText = {
   showServices: "عرض الخدمات",
   footer: {
     services: "الخدمات", company: "الشركة", contact: "التواصل", locations: "المواقع", whatsapp: "راسلنا عبر واتساب",
-    hours: "الاثنين – السبت، 10:00 – 19:00 (توقيت الهند)", tagline: "شريكك في النمو الرقمي: تسويق قائم على البيانات ونتائج قابلة للقياس.",
+    hours: "الاثنين – السبت · نعمل عبر مختلف المناطق الزمنية", tagline: "شريكك في النمو الرقمي: تسويق قائم على البيانات ونتائج قابلة للقياس.",
     rights: "جميع الحقوق محفوظة.", privacy: "سياسة الخصوصية", terms: "الشروط والأحكام",
   },
   coreServices: { seo: "تحسين محركات البحث", "google-ads": "إعلانات Google", "performance-marketing": "التسويق بالأداء", "local-seo": "السيو المحلي", "content-marketing": "تسويق المحتوى", "conversion-optimization": "تحسين معدل التحويل" },
@@ -80,7 +80,7 @@ const ja: ChromeText = {
   showServices: "サービスを表示",
   footer: {
     services: "サービス", company: "会社情報", contact: "お問い合わせ", locations: "対応地域", whatsapp: "WhatsAppで連絡",
-    hours: "月〜土 10:00〜19:00（インド時間）", tagline: "データに基づくマーケティングで、測定できる成長を実現するパートナーです。",
+    hours: "月〜土 · 世界各地のタイムゾーンに対応", tagline: "データに基づくマーケティングで、測定できる成長を実現するパートナーです。",
     rights: "All rights reserved.", privacy: "プライバシーポリシー", terms: "利用規約",
   },
   coreServices: { seo: "SEO対策", "google-ads": "Google広告", "performance-marketing": "パフォーマンスマーケティング", "local-seo": "ローカルSEO", "content-marketing": "コンテンツマーケティング", "conversion-optimization": "コンバージョン最適化" },
@@ -101,7 +101,7 @@ const es: ChromeText = {
   showServices: "Mostrar servicios",
   footer: {
     services: "Servicios", company: "Empresa", contact: "Contacto", locations: "Ubicaciones", whatsapp: "Escríbenos por WhatsApp",
-    hours: "Lun – Sáb, 10:00 – 19:00 (hora de la India)", tagline: "Tu socio de crecimiento digital: marketing basado en datos y resultados medibles.",
+    hours: "Lun – Sáb · trabajamos en todas las zonas horarias", tagline: "Tu socio de crecimiento digital: marketing basado en datos y resultados medibles.",
     rights: "Todos los derechos reservados.", privacy: "Política de privacidad", terms: "Términos y condiciones",
   },
   coreServices: { seo: "Posicionamiento SEO", "google-ads": "Google Ads y PPC", "performance-marketing": "Marketing de resultados", "local-seo": "SEO local", "content-marketing": "Marketing de contenidos", "conversion-optimization": "Optimización de la conversión" },
@@ -122,7 +122,7 @@ const fr: ChromeText = {
   showServices: "Afficher les services",
   footer: {
     services: "Services", company: "Entreprise", contact: "Contact", locations: "Implantations", whatsapp: "Écrivez-nous sur WhatsApp",
-    hours: "Lun – sam, 10 h – 19 h (heure de l’Inde)", tagline: "Votre partenaire de croissance digitale : un marketing fondé sur les données et des résultats mesurables.",
+    hours: "Lun – sam · disponibles sur tous les fuseaux horaires", tagline: "Votre partenaire de croissance digitale : un marketing fondé sur les données et des résultats mesurables.",
     rights: "Tous droits réservés.", privacy: "Politique de confidentialité", terms: "Conditions générales",
   },
   coreServices: { seo: "Référencement SEO", "google-ads": "Google Ads et SEA", "performance-marketing": "Marketing à la performance", "local-seo": "SEO local", "content-marketing": "Marketing de contenu", "conversion-optimization": "Optimisation de la conversion" },

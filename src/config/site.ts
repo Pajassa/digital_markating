@@ -19,8 +19,8 @@ export const siteConfig = {
     phoneE164: "+917303667586",
     whatsappNumber: "917303667586", // digits only, with country code
     whatsappMessage: "Hi Tesoap Lab, I'd like to discuss a growth audit for my business.",
-    city: "Mumbai, India", // street address intentionally not published yet
-    hours: "Mon – Sat, 10:00 – 19:00 IST",
+    city: "Worldwide", // street address intentionally not published yet
+    hours: "Mon – Sat · working across time zones",
   },
   /**
    * Real profile URLs only — e.g. { label: "LinkedIn", href: "https://www.linkedin.com/company/tesoap-lab" }.
