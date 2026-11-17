@@ -1,6 +1,6 @@
 import type { FAQ } from "@/types";
 
-export const cities = ["mumbai", "bangalore", "dubai", "singapore"] as const;
+export const cities = ["singapore", "dubai", "mumbai", "bangalore"] as const;
 export type CityKey = (typeof cities)[number];
 
 export const landingServices = ["seo", "digital-marketing-agency", "social-media-marketing", "email-marketing"] as const;

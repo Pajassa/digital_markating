@@ -10,7 +10,7 @@ export function LocationsSection() {
   return (
     <section className="section-y" aria-labelledby="locations-heading">
       <div className="container-x">
-        <SectionHeading eyebrow="Where we work" title={<span id="locations-heading">Local expertise in Mumbai, Bangalore, Dubai and Singapore.</span>} />
+        <SectionHeading eyebrow="Where we work" title={<span id="locations-heading">Local expertise in Singapore, Dubai, Mumbai and Bangalore.</span>} />
         <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {cities.map((c, i) => (
             <Reveal key={c} delay={i * 0.06} className="flex flex-col rounded-[var(--radius-card)] border border-line bg-ink-2 p-7">
