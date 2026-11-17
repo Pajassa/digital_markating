@@ -39,7 +39,7 @@ export function TrustSection() {
               : Array.from({ length: 6 }).map((_, i) => (
                   <li
                     key={i}
-                    className="grid h-20 place-items-center rounded-2xl border border-dashed border-[#c9ccd8] text-xs font-medium uppercase tracking-wider text-[#9a9eb0]"
+                    className="grid h-20 place-items-center rounded-2xl border border-dashed border-[#c9ccd8] text-xs font-medium uppercase tracking-wider text-[#5d6275]"
                   >
                     Client logo
                   </li>

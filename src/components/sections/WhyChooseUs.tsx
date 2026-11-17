@@ -23,8 +23,7 @@ export function WhyChooseUs() {
           />
           <ol className="mt-12 space-y-2">
             {points.map((p, i) => (
-              <Reveal key={p.title} delay={i * 0.08}>
-                <li className="group flex gap-5 rounded-2xl border border-transparent p-4 transition-colors hover:border-line hover:bg-white/[0.03] sm:p-5">
+              <Reveal as="li" key={p.title} delay={i * 0.08} className="group flex gap-5 rounded-2xl border border-transparent p-4 transition-colors hover:border-line hover:bg-white/[0.03] sm:p-5">
                   <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-violet/15 text-violet-soft transition-colors group-hover:bg-violet group-hover:text-white">
                     <p.icon aria-hidden className="size-5" />
                   </span>
@@ -32,7 +31,6 @@ export function WhyChooseUs() {
                     <h3 className="text-xl font-semibold">{p.title}</h3>
                     <p className="mt-1.5 leading-relaxed text-muted">{p.text}</p>
                   </div>
-                </li>
               </Reveal>
             ))}
           </ol>

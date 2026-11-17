@@ -19,10 +19,10 @@ export function LocationsSection() {
                 <ArrowUpRight aria-hidden className="size-5 text-lime transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </Link>
               <p className="mt-3 text-sm text-muted">{cityHubs[c].sectors.join(" · ")}</p>
-              <ul className="mt-6 space-y-2 border-t border-line pt-5">
+              <ul className="mt-6 space-y-1 border-t border-line pt-4">
                 {landingServices.map((s) => (
                   <li key={s}>
-                    <Link href={landingPath(c, s)} className="text-white/80 transition-colors hover:text-lime">{serviceNames[s]} in {cityNames[c]}</Link>
+                    <Link href={landingPath(c, s)} className="inline-block py-1.5 text-white/80 transition-colors hover:text-lime">{serviceNames[s]} in {cityNames[c]}</Link>
                   </li>
                 ))}
               </ul>
