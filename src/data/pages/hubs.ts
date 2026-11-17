@@ -1,6 +1,6 @@
 import type { CityKey, LandingServiceKey } from "./types";
 
-/** City hub pages (/mumbai, /bangalore, /dubai): the parent of each city's four service pages. */
+/** City hub pages (/mumbai, /bangalore, /dubai, /singapore): the parent of each city's four service pages. */
 export interface CityHub {
   metaTitle: string;
   metaDescription: string;
@@ -56,6 +56,21 @@ export const cityHubs: Record<CityKey, CityHub> = {
       "digital-marketing-agency": "Market-by-market planning across the UAE, GCC and beyond.",
       "social-media-marketing": "High-end bilingual campaigns for Instagram, TikTok and Snapchat.",
       "email-marketing": "Elegant newsletters and bilingual automated journeys.",
+    },
+  },
+  singapore: {
+    metaTitle: "Marketing Services in Singapore: SEO, Social, Email",
+    metaDescription:
+      "Tesoap Lab helps Singapore fintech, SaaS, professional services and consumer brands grow locally and across Asia-Pacific with SEO, paid media, social and email.",
+    kicker: "Marketing services · Singapore",
+    title: "Growth from Singapore, across Asia-Pacific.",
+    lede: "Singapore companies sell to buyers on the island and across the region at the same time. Explore the services we run for both.",
+    sectors: ["Fintech", "SaaS", "Professional services", "Logistics", "Consumer brands"],
+    blurbs: {
+      seo: "Local and APAC SEO with clean technical foundations.",
+      "digital-marketing-agency": "Market-by-market planning across ASEAN, tied to pipeline.",
+      "social-media-marketing": "Instagram, TikTok and LinkedIn, each with a clear job.",
+      "email-marketing": "Consent-first newsletters and lifecycle automation.",
     },
   },
 };

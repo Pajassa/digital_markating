@@ -10,7 +10,7 @@ import {
   landingPath,
   serviceNames,
 } from "@/data/pages";
-import { arabicPath } from "@/data/pages/dubai-ar";
+import { languageAlternates } from "@/data/pages/i18n";
 import { landingComponents } from "@/components/landing-pages/registry";
 import { LocalLinks } from "@/components/landing-pages/shared";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const r = await resolve(params);
   if (!r) return {};
   const path = landingPath(r.city, r.service);
-  const languages = r.city === "dubai" ? { en: path, ar: arabicPath(r.service), "x-default": path } : undefined;
+  const languages = languageAlternates(r.city, r.service);
   return buildMetadata({ title: r.page.metaTitle, description: r.page.metaDescription, path, languages });
 }
 

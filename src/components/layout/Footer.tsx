@@ -58,7 +58,7 @@ export function Footer() {
       </div>
 
       <nav aria-label="Locations" className="container-x border-t border-line py-8">
-        <div className="grid gap-6 sm:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {cities.map((city) => (
             <div key={city}>
               <h2 className="font-mono text-xs uppercase tracking-[0.18em] text-muted"><Link href={`/${city}`} className="hover:text-white">{cityNames[city]}</Link></h2>

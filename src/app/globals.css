@@ -17,6 +17,7 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --font-arabic: var(--font-plex-arabic), "Geeza Pro", "Segoe UI", Tahoma, sans-serif;
+  --font-jp: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", "Noto Sans JP", sans-serif;
 
   --radius-card: 1.5rem;
 
@@ -53,6 +54,9 @@
   }
   p { text-wrap: pretty; }
   /* Arabic pages: brand display font has no Arabic glyphs */
+  [lang="ja"] :is(h1, h2, h3, h4) {
+    font-family: var(--font-jp);
+  }
   [lang="ar"] :is(h1, h2, h3, h4) {
     font-family: var(--font-arabic);
     letter-spacing: 0;

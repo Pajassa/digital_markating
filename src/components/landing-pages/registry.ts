@@ -12,6 +12,10 @@ import { DubaiSocialMediaPage } from "./social-media/DubaiSocialMediaPage";
 import { MumbaiEmailMarketingPage } from "./email-marketing/MumbaiEmailMarketingPage";
 import { BangaloreEmailMarketingPage } from "./email-marketing/BangaloreEmailMarketingPage";
 import { DubaiEmailMarketingPage } from "./email-marketing/DubaiEmailMarketingPage";
+import { SingaporeSEOPage } from "./seo/SingaporeSEOPage";
+import { SingaporeDigitalMarketingPage } from "./digital-marketing/SingaporeDigitalMarketingPage";
+import { SingaporeSocialMediaPage } from "./social-media/SingaporeSocialMediaPage";
+import { SingaporeEmailMarketingPage } from "./email-marketing/SingaporeEmailMarketingPage";
 
 /** Each city × service pair has its own, individually art-directed page composition. */
 export const landingComponents: Record<CityKey, Record<LandingServiceKey, ComponentType>> = {
@@ -32,5 +36,11 @@ export const landingComponents: Record<CityKey, Record<LandingServiceKey, Compon
     "digital-marketing-agency": DubaiDigitalMarketingPage,
     "social-media-marketing": DubaiSocialMediaPage,
     "email-marketing": DubaiEmailMarketingPage,
+  },
+  singapore: {
+    seo: SingaporeSEOPage,
+    "digital-marketing-agency": SingaporeDigitalMarketingPage,
+    "social-media-marketing": SingaporeSocialMediaPage,
+    "email-marketing": SingaporeEmailMarketingPage,
   },
 };

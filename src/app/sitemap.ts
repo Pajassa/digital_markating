@@ -2,8 +2,11 @@ import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/seo";
 import { services } from "@/data/services";
 import { posts } from "@/data/blog";
-import { allLandingRoutes, cities, landingServices } from "@/data/pages";
-import { arabicPath } from "@/data/pages/dubai-ar";
+import { allLandingRoutes, cities } from "@/data/pages";
+import { languageAlternates, langs } from "@/data/pages/i18n";
+import { localizedRoutes } from "@/data/pages/localized";
+
+const abs = (m?: Record<string, string>) => (m ? { alternates: { languages: Object.fromEntries(Object.entries(m).map(([k, v]) => [k, absoluteUrl(v)])) } } : {});
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -22,15 +25,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.8,
-      ...(r.city === "dubai" ? { alternates: { languages: { en: absoluteUrl(r.path), ar: absoluteUrl(arabicPath(r.service)) } } } : {}),
+      ...abs(languageAlternates(r.city, r.service)),
     })),
-    ...landingServices.map((s) => ({
-      url: absoluteUrl(arabicPath(s)),
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-      alternates: { languages: { en: absoluteUrl(`/dubai/${s}`), ar: absoluteUrl(arabicPath(s)) } },
-    })),
+    ...langs.flatMap((l) =>
+      localizedRoutes(l).map(({ city, service }) => ({
+        url: absoluteUrl(`/${l}/${city}/${service}`),
+        lastModified: now,
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+        ...abs(languageAlternates(city, service)),
+      })),
+    ),
     ...posts.map((p) => ({ url: absoluteUrl(`/blog/${p.slug}`), lastModified: new Date(p.date), changeFrequency: "yearly" as const, priority: 0.6 })),
   ];
 }
