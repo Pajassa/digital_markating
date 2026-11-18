@@ -8,11 +8,46 @@ import { BlogCard } from "@/components/ui/BlogCard";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { ButtonLink } from "@/components/ui/Button";
 import { FinalCTA } from "@/components/sections/FinalCTA";
-import { articleSchema, buildMetadata } from "@/lib/seo";
+import { articleSchema, buildMetadata, faqSchema } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 import { TableOfContents, ShareButton } from "@/components/blog/ArticleTools.client";
 
 const slugify = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+const linkClass = "font-medium text-lime underline decoration-lime/40 underline-offset-4 transition-colors hover:decoration-lime";
+
+/** Renders inline [label](href) links and **bold** inside article text. */
+function Rich({ text }: { text: string }) {
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*)/g);
+  return (
+    <>
+      {parts.map((part, i) => {
+        const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+        if (link) {
+          const [, label, href] = link;
+          return href.startsWith("/")
+            ? <Link key={i} href={href} className={linkClass}>{label}</Link>
+            : <a key={i} href={href} target="_blank" rel="noopener" className={linkClass}>{label}</a>;
+        }
+        const bold = part.match(/^\*\*([^*]+)\*\*$/);
+        if (bold) return <strong key={i} className="font-semibold text-white">{bold[1]}</strong>;
+        return part;
+      })}
+    </>
+  );
+}
+
+function Paras({ items }: { items: string[] }) {
+  return <div className="space-y-5">{items.map((p) => <p key={p}><Rich text={p} /></p>)}</div>;
+}
+
+function List({ items }: { items: string[] }) {
+  return (
+    <ul className="mt-5 space-y-2 border-l-2 border-lime pl-6">
+      {items.map((li) => <li key={li}><Rich text={li} /></li>)}
+    </ul>
+  );
+}
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -39,7 +74,11 @@ export default async function BlogPostPage({ params }: Props) {
   const others = posts.filter((p) => p.slug !== post.slug);
   const related = others.slice(0, 3);
   const latest = [...others].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 4);
-  const toc = post.content.filter((b) => b.heading).map((b) => ({ id: slugify(b.heading!), label: b.heading! }));
+  const toc = [
+    ...post.content.filter((b) => b.heading).map((b) => ({ id: slugify(b.heading!), label: b.heading! })),
+    ...(post.faqs ? [{ id: "faq", label: "FAQ" }] : []),
+    ...(post.sources ? [{ id: "sources", label: "Sources" }] : []),
+  ];
 
   return (
     <>
@@ -80,21 +119,71 @@ export default async function BlogPostPage({ params }: Props) {
                 {post.content.map((block, i) => (
                   <section key={i}>
                     {block.heading && <h2 id={slugify(block.heading)} className="mb-4 scroll-mt-28 text-2xl font-semibold text-white sm:text-3xl">{block.heading}</h2>}
-                    <div className="space-y-5">
-                      {block.paragraphs.map((p) => <p key={p}>{p}</p>)}
-                    </div>
-                    {block.list && (
-                      <ul className="mt-5 space-y-2 border-l-2 border-lime pl-6">
-                        {block.list.map((li) => <li key={li}>{li}</li>)}
-                      </ul>
+                    <Paras items={block.paragraphs} />
+                    {block.list && <List items={block.list} />}
+                    {block.subsections?.map((sub) => (
+                      <div key={sub.heading} className="mt-8">
+                        <h3 className="mb-3 text-xl font-semibold text-white">{sub.heading}</h3>
+                        <Paras items={sub.paragraphs} />
+                        {sub.list && <List items={sub.list} />}
+                      </div>
+                    ))}
+                    {block.table && (
+                      <div className="mt-6 overflow-x-auto rounded-2xl border border-line bg-ink-2" role="region" aria-label={block.table.caption} tabIndex={0}>
+                        <table className="w-full min-w-[520px] text-left text-base leading-snug">
+                          <caption className="px-5 pt-4 pb-2 text-left font-display font-semibold text-white">{block.table.caption}</caption>
+                          <thead>
+                            <tr>{block.table.head.map((h) => <th key={h} scope="col" className="border-t border-line px-5 py-3 font-mono text-xs font-medium uppercase tracking-wider text-muted">{h}</th>)}</tr>
+                          </thead>
+                          <tbody>
+                            {block.table.rows.map((row) => (
+                              <tr key={row[0]}>
+                                {row.map((cell, ci) => ci === 0
+                                  ? <th key={ci} scope="row" className="border-t border-line px-5 py-3 align-top font-normal text-muted">{cell}</th>
+                                  : <td key={ci} className="border-t border-line px-5 py-3 align-top text-white">{cell}</td>)}
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
                     )}
+                    {block.after && <div className="mt-5"><Paras items={block.after} /></div>}
                   </section>
                 ))}
+                {post.faqs && (
+                  <section>
+                    <h2 id="faq" className="mb-4 scroll-mt-28 text-2xl font-semibold text-white sm:text-3xl">Frequently asked questions</h2>
+                    <div className="divide-y divide-line border-y border-line">
+                      {post.faqs.map((f) => (
+                        <details key={f.question} className="group py-4">
+                          <summary className="cursor-pointer font-display text-lg font-semibold text-white">{f.question}</summary>
+                          <p className="mt-3 text-base">{f.answer}</p>
+                        </details>
+                      ))}
+                    </div>
+                  </section>
+                )}
+                {post.sources && (
+                  <section>
+                    <h2 id="sources" className="mb-4 scroll-mt-28 text-2xl font-semibold text-white sm:text-3xl">References and sources</h2>
+                    <ol className="list-decimal space-y-4 pl-6 text-base">
+                      {post.sources.map((src) => (
+                        <li key={src.url}>
+                          {src.label}
+                          <a href={src.url} target="_blank" rel="noopener" className="mt-1 block break-all font-mono text-xs text-lime hover:underline">{src.url.replace(/^https?:\/\/(www\.)?/, "")}</a>
+                        </li>
+                      ))}
+                    </ol>
+                  </section>
+                )}
               </div>
               <aside className="mt-16 rounded-[var(--radius-card)] border border-line bg-ink-2 p-8">
                 <p className="font-display text-2xl font-semibold">Want this applied to your business?</p>
                 <p className="mt-2 text-muted">Get a free growth audit with prioritised recommendations for your website and campaigns.</p>
-                <ButtonLink href="/contact?intent=audit" arrow className="mt-6">Get a free growth audit</ButtonLink>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <ButtonLink href="/contact?intent=audit" arrow>Get a free growth audit</ButtonLink>
+                  <ButtonLink href="/services/seo" variant="outline">Explore our SEO services</ButtonLink>
+                </div>
               </aside>
             </div>
 
@@ -129,6 +218,7 @@ export default async function BlogPostPage({ params }: Props) {
       </section>
       <FinalCTA />
       <JsonLd data={articleSchema({ title: post.title, description: post.excerpt, path, date: post.date, author: post.author })} />
+      {post.faqs && <JsonLd data={faqSchema(post.faqs)} />}
     </>
   );
 }
