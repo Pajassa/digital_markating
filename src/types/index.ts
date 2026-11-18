@@ -86,7 +86,17 @@ export interface BlogPost {
   readingMinutes: number;
   author: string;
   art: ArtVariant;
-  content: { heading?: string; paragraphs: string[]; list?: string[] }[];
+  /** Paragraph and list text may contain inline links written as [label](/path or https://...) and **bold**. */
+  content: {
+    heading?: string;
+    paragraphs: string[];
+    list?: string[];
+    subsections?: { heading: string; paragraphs: string[]; list?: string[] }[];
+    table?: { caption: string; head: string[]; rows: string[][] };
+    after?: string[];
+  }[];
+  faqs?: { question: string; answer: string }[];
+  sources?: { label: string; url: string }[];
 }
 
 export type ArtVariant = "orbit" | "bars" | "waves" | "grid" | "rings" | "steps";
