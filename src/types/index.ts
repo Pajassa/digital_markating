@@ -89,12 +89,26 @@ export interface BlogPost {
   /** Paragraph and list text may contain inline links written as [label](/path or https://...) and **bold**. */
   content: {
     heading?: string;
+    /** Short label for the table of contents (defaults to the heading). */
+    toc?: string;
     paragraphs: string[];
     list?: string[];
     subsections?: { heading: string; paragraphs: string[]; list?: string[] }[];
     table?: { caption: string; head: string[]; rows: string[][] };
+    timeline?: { date: string; title: string; text: string }[];
+    stats?: { value: string; label: string }[];
+    chart?: { caption: string; source: string; max: number; bars: { label: string; value: number }[] };
+    practices?: { term: string; text: string }[];
+    pills?: string[];
     after?: string[];
   }[];
+  /** "In short" summary box shown above the article body. */
+  /** Subtitle under the headline (defaults to the excerpt). */
+  deck?: string;
+  summary?: string[];
+  tags?: string[];
+  note?: string;
+  citation?: boolean;
   faqs?: { question: string; answer: string }[];
   sources?: { label: string; url: string }[];
 }

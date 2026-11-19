@@ -67,3 +67,22 @@ export function ShareButton({ title }: { title: string }) {
     </button>
   );
 }
+
+/** "Cite this article" box with a copy-to-clipboard button. */
+export function CitationBox({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <section aria-labelledby="cite-heading" className="rounded-[var(--radius-card)] border border-line bg-ink-2 p-6">
+      <h2 id="cite-heading" className="font-display text-xl font-semibold text-white">Cite this article</h2>
+      <p className="mt-2 text-base text-muted">Use this format when referencing the article. The page has a stable address, a publication date and linked primary sources.</p>
+      <code className="mt-4 block whitespace-pre-wrap break-words rounded-xl border border-line bg-ink p-4 font-mono text-sm leading-relaxed text-white/85">{text}</code>
+      <button
+        type="button"
+        onClick={() => navigator.clipboard?.writeText(text).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1800); }, () => {})}
+        className="mt-4 inline-flex items-center gap-2 rounded-xl bg-lime px-4 py-2 font-display text-sm font-semibold text-ink transition-colors hover:bg-[#c9ff85]"
+      >
+        {copied ? <><Check className="size-4" /> Copied</> : "Copy citation"}
+      </button>
+    </section>
+  );
+}

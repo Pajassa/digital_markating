@@ -8,9 +8,10 @@ import { BlogCard } from "@/components/ui/BlogCard";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { ButtonLink } from "@/components/ui/Button";
 import { FinalCTA } from "@/components/sections/FinalCTA";
-import { articleSchema, buildMetadata, faqSchema } from "@/lib/seo";
+import { absoluteUrl, articleSchema, buildMetadata, faqSchema } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
-import { TableOfContents, ShareButton } from "@/components/blog/ArticleTools.client";
+import { TableOfContents, ShareButton, CitationBox } from "@/components/blog/ArticleTools.client";
+import { siteConfig } from "@/config/site";
 
 const slugify = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
@@ -18,7 +19,7 @@ const linkClass = "font-medium text-lime underline decoration-lime/40 underline-
 
 /** Renders inline [label](href) links and **bold** inside article text. */
 function Rich({ text }: { text: string }) {
-  const parts = text.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*)/g);
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|\*[^*]+\*)/g);
   return (
     <>
       {parts.map((part, i) => {
@@ -31,6 +32,8 @@ function Rich({ text }: { text: string }) {
         }
         const bold = part.match(/^\*\*([^*]+)\*\*$/);
         if (bold) return <strong key={i} className="font-semibold text-white">{bold[1]}</strong>;
+        const em = part.match(/^\*([^*]+)\*$/);
+        if (em) return <em key={i}>{em[1]}</em>;
         return part;
       })}
     </>
@@ -75,7 +78,7 @@ export default async function BlogPostPage({ params }: Props) {
   const related = others.slice(0, 3);
   const latest = [...others].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 4);
   const toc = [
-    ...post.content.filter((b) => b.heading).map((b) => ({ id: slugify(b.heading!), label: b.heading! })),
+    ...post.content.filter((b) => b.heading).map((b) => ({ id: slugify(b.heading!), label: b.toc ?? b.heading! })),
     ...(post.faqs ? [{ id: "faq", label: "FAQ" }] : []),
     ...(post.sources ? [{ id: "sources", label: "Sources" }] : []),
   ];
@@ -92,7 +95,7 @@ export default async function BlogPostPage({ params }: Props) {
               <span className="ml-3"><time dateTime={post.date}>{formatDate(post.date)}</time> · {post.readingMinutes} min read · {post.author}</span>
             </p>
             <h1 className="mt-6 text-4xl leading-[1.05] font-semibold sm:text-6xl">{post.title}</h1>
-            <p className="mt-6 text-xl leading-relaxed text-muted">{post.excerpt}</p>
+            <p className="mt-6 text-xl leading-relaxed text-muted">{post.deck ?? post.excerpt}</p>
           </div>
         </header>
         <div className="container-x max-w-5xl">
@@ -102,7 +105,9 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-line pb-6">
             <div className="flex flex-wrap items-center gap-3">
               <span className="text-muted">Tags</span>
-              <Link href="/blog" className="rounded-lg bg-violet/25 px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-violet-soft transition-colors hover:bg-violet/40">{post.category}</Link>
+              {(post.tags ?? [post.category]).map((t) => (
+                <Link key={t} href="/blog" className="rounded-lg bg-violet/25 px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-violet-soft transition-colors hover:bg-violet/40">{t}</Link>
+              ))}
             </div>
             <ShareButton title={post.title} />
           </div>
@@ -116,6 +121,12 @@ export default async function BlogPostPage({ params }: Props) {
 
             <div className="min-w-0">
               <div className="space-y-10 text-lg leading-[1.8] text-white/85">
+                {post.summary && (
+                  <aside aria-labelledby="in-short" className="rounded-[var(--radius-card)] border border-line bg-ink-2 p-6 sm:p-8">
+                    <p id="in-short" className="font-mono text-sm font-medium uppercase tracking-widest"><span className="bg-lime px-2 py-0.5 text-ink">In short</span></p>
+                    <List items={post.summary} />
+                  </aside>
+                )}
                 {post.content.map((block, i) => (
                   <section key={i}>
                     {block.heading && <h2 id={slugify(block.heading)} className="mb-4 scroll-mt-28 text-2xl font-semibold text-white sm:text-3xl">{block.heading}</h2>}
@@ -128,6 +139,60 @@ export default async function BlogPostPage({ params }: Props) {
                         {sub.list && <List items={sub.list} />}
                       </div>
                     ))}
+                    {block.timeline && (
+                      <ol className="mt-6 border-t border-line">
+                        {block.timeline.map((t) => (
+                          <li key={t.title} className="grid gap-1 border-b border-line py-4 sm:grid-cols-[110px_minmax(0,1fr)] sm:gap-4">
+                            <span className="pt-1 font-mono text-sm font-medium text-lime">{t.date}</span>
+                            <div>
+                              <h3 className="text-lg font-semibold text-white">{t.title}</h3>
+                              <p className="mt-1 text-base leading-relaxed">{t.text}</p>
+                            </div>
+                          </li>
+                        ))}
+                      </ol>
+                    )}
+                    {block.stats && (
+                      <ul className="mt-6 grid gap-3 sm:grid-cols-3">
+                        {block.stats.map((st) => (
+                          <li key={st.label} className="rounded-2xl border border-line bg-ink-2 p-5">
+                            <strong className="block font-display text-4xl font-semibold leading-none tracking-tight text-lime tabular-nums">{st.value}</strong>
+                            <span className="mt-2 block text-sm leading-snug text-muted">{st.label}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {block.chart && (
+                      <figure className="mt-6 rounded-2xl border border-line bg-ink-2 p-6">
+                        <figcaption className="mb-5 font-display text-lg font-semibold text-white">{block.chart.caption}</figcaption>
+                        <ul className="space-y-4">
+                          {block.chart.bars.map((b) => (
+                            <li key={b.label} className="grid grid-cols-[minmax(0,1fr)_48px] items-center gap-x-3 gap-y-1">
+                              <span className="col-span-2 text-sm leading-snug">{b.label}</span>
+                              <span className="h-5 overflow-hidden rounded bg-white/5"><span className="block h-full rounded bg-lime" style={{ width: `${(b.value / block.chart!.max) * 100}%` }} /></span>
+                              <span className="text-right font-mono text-sm font-medium text-white tabular-nums">{b.value}%</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <div aria-hidden className="mt-2 mr-[60px] flex justify-between font-mono text-[11px] text-muted"><span>0%</span><span>{block.chart.max / 2}%</span><span>{block.chart.max}%</span></div>
+                        <p className="mt-4 text-xs text-muted">{block.chart.source}</p>
+                      </figure>
+                    )}
+                    {block.practices && (
+                      <dl className="mt-6 border-t border-line">
+                        {block.practices.map((pr) => (
+                          <div key={pr.term} className="grid gap-1 border-b border-line py-4 sm:grid-cols-[170px_minmax(0,1fr)] sm:gap-5">
+                            <dt className="font-display font-semibold text-white">{pr.term}</dt>
+                            <dd className="text-base leading-relaxed">{pr.text}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    )}
+                    {block.pills && (
+                      <ul className="mt-6 flex flex-wrap gap-2">
+                        {block.pills.map((pl) => <li key={pl} className="rounded-full border border-line bg-ink-2 px-4 py-1.5 text-base">{pl}</li>)}
+                      </ul>
+                    )}
                     {block.table && (
                       <div className="mt-6 overflow-x-auto rounded-2xl border border-line bg-ink-2" role="region" aria-label={block.table.caption} tabIndex={0}>
                         <table className="w-full min-w-[520px] text-left text-base leading-snug">
@@ -165,7 +230,8 @@ export default async function BlogPostPage({ params }: Props) {
                 )}
                 {post.sources && (
                   <section>
-                    <h2 id="sources" className="mb-4 scroll-mt-28 text-2xl font-semibold text-white sm:text-3xl">References and sources</h2>
+                    <h2 id="sources" className="mb-4 scroll-mt-28 text-2xl font-semibold text-white sm:text-3xl">References and research sources</h2>
+                    <p className="mb-5">These sources support the statistics, technical explanations and industry developments in this article.</p>
                     <ol className="list-decimal space-y-4 pl-6 text-base">
                       {post.sources.map((src) => (
                         <li key={src.url}>
@@ -174,7 +240,11 @@ export default async function BlogPostPage({ params }: Props) {
                         </li>
                       ))}
                     </ol>
+                    {post.note && <p className="mt-6 border-t border-line pt-4 text-sm text-muted">{post.note}</p>}
                   </section>
+                )}
+                {post.citation && (
+                  <CitationBox text={`${siteConfig.name}. "${post.title}." ${siteConfig.name}, ${formatDate(post.date)}. ${absoluteUrl(path)}`} />
                 )}
               </div>
               <aside className="mt-16 rounded-[var(--radius-card)] border border-line bg-ink-2 p-8">
