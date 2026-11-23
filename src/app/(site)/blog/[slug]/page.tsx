@@ -170,11 +170,11 @@ export default async function BlogPostPage({ params }: Props) {
                             <li key={b.label} className="grid grid-cols-[minmax(0,1fr)_48px] items-center gap-x-3 gap-y-1">
                               <span className="col-span-2 text-sm leading-snug">{b.label}</span>
                               <span className="h-5 overflow-hidden rounded bg-white/5"><span className="block h-full rounded bg-lime" style={{ width: `${(b.value / block.chart!.max) * 100}%` }} /></span>
-                              <span className="text-right font-mono text-sm font-medium text-white tabular-nums">{b.value}%</span>
+                              <span className="text-right font-mono text-sm font-medium text-white tabular-nums">{b.value}{block.chart!.unit ?? "%"}</span>
                             </li>
                           ))}
                         </ul>
-                        <div aria-hidden className="mt-2 mr-[60px] flex justify-between font-mono text-[11px] text-muted"><span>0%</span><span>{block.chart.max / 2}%</span><span>{block.chart.max}%</span></div>
+                        <div aria-hidden className="mt-2 mr-[60px] flex justify-between font-mono text-[11px] text-muted"><span>0{block.chart.unit ?? "%"}</span><span>{block.chart.max / 2}{block.chart.unit ?? "%"}</span><span>{block.chart.max}{block.chart.unit ?? "%"}</span></div>
                         <p className="mt-4 text-xs text-muted">{block.chart.source}</p>
                       </figure>
                     )}

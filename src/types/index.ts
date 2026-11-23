@@ -97,7 +97,7 @@ export interface BlogPost {
     table?: { caption: string; head: string[]; rows: string[][] };
     timeline?: { date: string; title: string; text: string }[];
     stats?: { value: string; label: string }[];
-    chart?: { caption: string; source: string; max: number; bars: { label: string; value: number }[] };
+    chart?: { caption: string; source: string; max: number; unit?: string; bars: { label: string; value: number }[] };
     practices?: { term: string; text: string }[];
     pills?: string[];
     after?: string[];
