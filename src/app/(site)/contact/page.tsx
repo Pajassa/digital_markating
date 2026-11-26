@@ -3,7 +3,8 @@ import { Suspense } from "react";
 import { Mail, Phone, MessageCircle, Clock } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, faqSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/ui/JsonLd";
 import { siteConfig, whatsappLink } from "@/config/site";
 
 export const metadata: Metadata = buildMetadata({
@@ -16,6 +17,14 @@ const expect = [
   "A strategist reviews your enquiry within one business day",
   "A 30-minute discovery call about goals and constraints",
   "A written audit with prioritised opportunities, free",
+];
+
+const faqs = [
+  { question: "Is the growth audit really free?", answer: "Yes. We review your website, search visibility and any running campaigns, then share a written list of prioritised opportunities. There is no obligation to work with us afterwards." },
+  { question: "What should I include in my enquiry?", answer: "Your website, the services you are interested in, your main goal (more leads, sales or bookings) and a rough monthly budget. The more context you share, the more specific our audit can be." },
+  { question: "Which cities and countries do you work in?", answer: "We work with businesses across India, including Mumbai and Bangalore, and internationally in Dubai, Singapore and other markets. Calls happen online, so location is rarely a barrier." },
+  { question: "How soon can we start?", answer: "Most projects begin within one to two weeks of agreeing on scope. Urgent campaign fixes can often start sooner." },
+  { question: "Do you need long-term contracts?", answer: "No. We usually suggest a three-month starting period, because SEO and paid media need time to show reliable results, and then continue month to month." },
 ];
 
 export default function ContactPage() {
@@ -60,6 +69,20 @@ export default function ContactPage() {
           </aside>
         </div>
       </section>
+      <section className="pb-24" aria-labelledby="contact-faq">
+        <div className="container-x max-w-4xl">
+          <h2 id="contact-faq" className="text-3xl font-semibold sm:text-4xl">Before you get in touch</h2>
+          <dl className="mt-8 divide-y divide-line border-y border-line">
+            {faqs.map((f) => (
+              <div key={f.question} className="py-5">
+                <dt className="font-semibold text-white">{f.question}</dt>
+                <dd className="mt-2 leading-relaxed text-muted">{f.answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+      <JsonLd data={faqSchema(faqs)} />
     </>
   );
 }

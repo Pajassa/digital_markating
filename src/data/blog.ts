@@ -5,6 +5,7 @@ export const posts: BlogPost[] = [
   {
     slug: "ui-design-trends-2026-2027",
     title: "UI Design Trends in 2026–2027: From Agentic Interfaces to Adaptive, Spatial and Sustainable UX",
+    seoTitle: "UI Design Trends 2026–2027: Agentic, Adaptive & Spatial UX",
     excerpt: "Explore evidence-backed UI design trends shaping 2026 and forecasts for 2027, including agentic AI interfaces, adaptive personalization, spatial UX, accessibility, typography, motion, design systems, performance and sustainability.",
     category: "UI/UX Design",
     date: "2026-11-23",

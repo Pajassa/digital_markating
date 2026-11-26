@@ -9,7 +9,7 @@ import { buildMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Case Studies",
+  title: "Case Studies: SEO & Marketing Results",
   description: "How we approach SEO, Google Ads, performance marketing and CRO engagements — from business challenge to strategy and measurable outcomes.",
   path: "/case-studies",
 });

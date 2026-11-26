@@ -80,6 +80,8 @@ export interface Testimonial {
 export interface BlogPost {
   slug: string;
   title: string;
+  /** Shorter <title> for search results when the headline is long (keep under ~60 characters). */
+  seoTitle?: string;
   excerpt: string;
   category: string;
   date: string;

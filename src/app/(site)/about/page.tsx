@@ -10,7 +10,7 @@ import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "About Us",
+  title: "About Us: Digital Marketing Agency Team",
   description: `${siteConfig.name} is a data-driven digital growth agency for ambitious businesses. Learn about our principles, approach and what it's like to work with us.`,
   path: "/about",
 });

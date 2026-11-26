@@ -10,7 +10,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { JsonLd } from "@/components/ui/JsonLd";
-import { absoluteUrl, buildMetadata } from "@/lib/seo";
+import { absoluteUrl, buildMetadata, faqSchema } from "@/lib/seo";
 import { siteConfig } from "@/config/site";
 
 type Props = { params: Promise<{ city: string }> };
@@ -106,8 +106,31 @@ export default async function CityHubPage({ params }: Props) {
         </div>
       </section>
 
+      <section className="pb-20 sm:pb-28" aria-labelledby="hub-approach">
+        <div className="container-x grid gap-12 lg:grid-cols-2">
+          <div>
+            <h2 id="hub-approach" className="text-3xl font-semibold sm:text-4xl">{h.approachTitle}</h2>
+            <div className="mt-6 space-y-5 text-lg leading-relaxed text-muted">
+              {h.approach.map((p) => <p key={p}>{p}</p>)}
+            </div>
+          </div>
+          <div>
+            <h2 className="text-3xl font-semibold sm:text-4xl">Questions from {cityNames[city]} businesses</h2>
+            <dl className="mt-6 divide-y divide-line border-y border-line">
+              {h.faqs.map((f) => (
+                <div key={f.question} className="py-5">
+                  <dt className="font-semibold text-white">{f.question}</dt>
+                  <dd className="mt-2 leading-relaxed text-muted">{f.answer}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+
       <FinalCTA title={`Grow your business in ${cityNames[city]}.`} />
 
+      <JsonLd data={faqSchema(h.faqs)} />
       <JsonLd
         data={{
           "@context": "https://schema.org",

@@ -64,9 +64,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const p = getPost(slug);
   if (!p) return {};
-  const meta = buildMetadata({ title: p.title, description: p.excerpt, path: `/blog/${p.slug}`, type: "article", publishedTime: p.date });
+  const title = p.seoTitle ?? p.title;
+  const meta = buildMetadata({ title, description: p.excerpt, path: `/blog/${p.slug}`, type: "article", publishedTime: p.date });
   // Long headlines would be truncated in search results once " | Tesoap Lab" is appended — drop the suffix for those.
-  return p.title.length > 47 ? { ...meta, title: { absolute: p.title } } : meta;
+  return title.length > 47 ? { ...meta, title: { absolute: title } } : meta;
 }
 
 export default async function BlogPostPage({ params }: Props) {

@@ -44,7 +44,7 @@ export const frPages: LocalizedSet = {
     },
     "digital-marketing-agency": {
       label: "Marketing digital à Dubaï",
-      metaTitle: "Agence de marketing digital à Dubaï | EAU et CCG",
+      metaTitle: "Marketing digital à Dubaï | EAU et CCG",
       metaDescription: "Marketing digital pour les entreprises de Dubaï qui vendent aux EAU, dans le CCG et à l’international. Recherche, publicité et analyse pensées par marché et par langue.",
       kicker: "Agence de marketing digital · Dubaï",
       title: "Une croissance internationale,",
@@ -71,7 +71,7 @@ export const frPages: LocalizedSet = {
     },
     "social-media-marketing": {
       label: "Marketing sur les réseaux sociaux à Dubaï",
-      metaTitle: "Agence réseaux sociaux à Dubaï | Instagram et TikTok",
+      metaTitle: "Réseaux sociaux à Dubaï | Instagram, TikTok",
       metaDescription: "Marketing sur les réseaux sociaux pour les marques de Dubaï : contenus et campagnes bilingues haut de gamme pour Instagram, TikTok et Snapchat.",
       kicker: "Réseaux sociaux · Dubaï",
       title: "Des contenus à la hauteur",
@@ -127,7 +127,7 @@ export const frPages: LocalizedSet = {
   singapore: {
     seo: {
       label: "SEO à Singapour",
-      metaTitle: "Agence SEO à Singapour | Recherche en Asie-Pacifique",
+      metaTitle: "Agence SEO à Singapour | Asie-Pacifique",
       metaDescription: "SEO pour les entreprises basées à Singapour qui vendent en Asie-Pacifique : SEO technique, contenu et stratégie de recherche par marché pour générer des demandes.",
       kicker: "SEO · Singapour",
       title: "Depuis Singapour,",
@@ -181,7 +181,7 @@ export const frPages: LocalizedSet = {
     },
     "social-media-marketing": {
       label: "Marketing sur les réseaux sociaux à Singapour",
-      metaTitle: "Agence réseaux sociaux à Singapour | Instagram et LinkedIn",
+      metaTitle: "Réseaux sociaux à Singapour | LinkedIn",
       metaDescription: "Marketing sur les réseaux sociaux pour les marques à Singapour : stratégie, production, animation de communauté et publicité sur Instagram, TikTok et LinkedIn.",
       kicker: "Réseaux sociaux · Singapour",
       title: "Un public divers,",

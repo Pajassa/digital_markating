@@ -41,7 +41,7 @@ export const singaporeSeo = {
 /* ------------------------------------------------------------------ */
 export const singaporeDigital = {
   label: "Digital Marketing in Singapore",
-  metaTitle: "Digital Marketing Agency in Singapore | APAC Growth",
+  metaTitle: "Digital Marketing Agency Singapore | APAC",
   metaDescription:
     "Digital marketing for companies growing from Singapore into ASEAN and Asia-Pacific. Search, paid media and analytics planned market by market and tied to revenue.",
   lede: "Singapore is where many companies run Asia from. We plan search, paid media and measurement market by market, then report it all against pipeline and revenue in one place.",
@@ -124,7 +124,7 @@ export const singaporeSocial = {
 /* ------------------------------------------------------------------ */
 export const singaporeEmail = {
   label: "Email Marketing in Singapore",
-  metaTitle: "Email Marketing Agency in Singapore | Automation",
+  metaTitle: "Email Marketing Agency in Singapore",
   metaDescription:
     "Email marketing for Singapore businesses: consent-first newsletters, lifecycle automation, segmentation and deliverability that drive purchases and repeat business.",
   lede: "Email is one of the few channels you actually own. We build consent-first programmes that turn subscribers into customers, and customers into regulars.",

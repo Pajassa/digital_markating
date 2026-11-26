@@ -44,7 +44,7 @@ export const esPages: LocalizedSet = {
     },
     "digital-marketing-agency": {
       label: "Marketing digital en Dubái",
-      metaTitle: "Agencia de marketing digital en Dubái | EAU y CCG",
+      metaTitle: "Marketing digital en Dubái | EAU y CCG",
       metaDescription: "Marketing digital para empresas de Dubái que venden en los EAU, el CCG y el resto del mundo. Búsqueda, publicidad y analítica planificadas por mercado e idioma.",
       kicker: "Agencia de marketing digital · Dubái",
       title: "Crecimiento internacional,",
@@ -71,7 +71,7 @@ export const esPages: LocalizedSet = {
     },
     "social-media-marketing": {
       label: "Marketing en redes sociales en Dubái",
-      metaTitle: "Marketing en redes sociales en Dubái | Instagram y TikTok",
+      metaTitle: "Redes sociales en Dubái | Instagram y TikTok",
       metaDescription: "Marketing en redes sociales para marcas en Dubái: contenido y campañas bilingües de alto nivel para Instagram, TikTok y Snapchat.",
       kicker: "Redes sociales · Dubái",
       title: "Contenido a la altura",
@@ -98,7 +98,7 @@ export const esPages: LocalizedSet = {
     },
     "email-marketing": {
       label: "Email marketing en Dubái",
-      metaTitle: "Email marketing en Dubái | Newsletters bilingües",
+      metaTitle: "Email marketing en Dubái | Bilingüe",
       metaDescription: "Email marketing para empresas en Dubái: newsletters y automatizaciones en inglés y árabe que fortalecen la relación con tus clientes.",
       kicker: "Email marketing · Dubái",
       title: "Tu marca,",
@@ -127,7 +127,7 @@ export const esPages: LocalizedSet = {
   singapore: {
     seo: {
       label: "SEO en Singapur",
-      metaTitle: "Agencia SEO en Singapur | Búsqueda en Asia-Pacífico",
+      metaTitle: "Agencia SEO en Singapur | Asia-Pacífico",
       metaDescription: "SEO para empresas con sede en Singapur que venden en Asia-Pacífico: SEO técnico, contenido y estrategia de búsqueda por mercado para generar consultas.",
       kicker: "SEO · Singapur",
       title: "Desde Singapur,",
@@ -154,7 +154,7 @@ export const esPages: LocalizedSet = {
     },
     "digital-marketing-agency": {
       label: "Marketing digital en Singapur",
-      metaTitle: "Agencia de marketing digital en Singapur | ASEAN",
+      metaTitle: "Marketing digital en Singapur | ASEAN",
       metaDescription: "Marketing digital para empresas que crecen desde Singapur hacia la ASEAN y Asia-Pacífico. Búsqueda, publicidad y analítica en una sola estrategia.",
       kicker: "Agencia de marketing digital · Singapur",
       title: "Desde tu sede en Asia,",
@@ -181,7 +181,7 @@ export const esPages: LocalizedSet = {
     },
     "social-media-marketing": {
       label: "Marketing en redes sociales en Singapur",
-      metaTitle: "Marketing en redes sociales en Singapur | Instagram y LinkedIn",
+      metaTitle: "Redes sociales en Singapur | LinkedIn",
       metaDescription: "Marketing en redes sociales para marcas en Singapur: estrategia, producción, gestión de comunidad y publicidad en Instagram, TikTok y LinkedIn.",
       kicker: "Redes sociales · Singapur",
       title: "Un público diverso,",
