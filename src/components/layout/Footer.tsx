@@ -87,7 +87,8 @@ export function Footer() {
       <div className="border-t border-line">
         <div className="container-x flex flex-col gap-3 py-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} {siteConfig.legalName}. {t.footer.rights}</p>
-          <ul className="flex gap-6">
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            <li><a href="https://reelsave.vrumo.in" target="_blank" rel="noopener" className="hover:text-white">ReelSave – Free Instagram Reels Downloader</a></li>
             {legalLinks.map((l) => ({ ...l, label: l.href === "/terms" ? t.footer.terms : t.footer.privacy })).map((l) => (
               <li key={l.href}><Link href={l.href} className="hover:text-white">{l.label}</Link></li>
             ))}
